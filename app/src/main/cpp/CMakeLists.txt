@@ -29,3 +29,6 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
         # 如果有更多模块，继续添加
 )
 
+# 设置子模块 module1 的头文件路径
+target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/module1)  # module1 模块的头文件路径
