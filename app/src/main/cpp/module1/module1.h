@@ -28,6 +28,12 @@ void module1_function();  // 假设 module1_function() 是在 Module1Library 中
 
 void module1_test();
 
+namespace MySpace1{
+    int paramA = 20;
+    void func1();
+    void func2(int param);
+}
+
 
 #endif //NDKDEMO_MODULE1_H
 

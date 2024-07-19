@@ -42,10 +42,10 @@ void module1_test() {
     p1.display();
 
     //C++中的指针是一种变量，它是指向某个变量的内存地址。通过指针，我们可以直接访问和操作内存中的数据。
-    int a =10;
+    int a = 10;
     int *ptr; //声明一个指针
     ptr = &a; //取地址运算符（&）将变量的地址赋值给指针
-    *ptr =20; //修改指向的内容
+    *ptr = 20; //修改指向的内容
 
     //在C++中，引用是一种别名，它指向了一个已经存在的变量或者对象，通过引用可以直接操作原始变量。
     int &ref = a; //声明引用ref，它是变量a的别名。
@@ -67,14 +67,75 @@ void module1_test() {
     // malloc 和 free 是C语言中的函数，用于动态分配和释放内存。
     // C++中继承了这一特性，使用 malloc 分配内存时，需要手动指定要分配的字节数，并返回一个指向分配内存的指针。
     // 使用 free 释放内存时，需要传入指向要释放的内存的指针。
-    //cpp 代码解读复制代码
     //sizeof(int)是int 的大小，
-    int *ptr = (int *) malloc(sizeof(int));
-    free(ptr);
+    int *ptr2 = (int *) malloc(sizeof(int));
+    LOGE("我是log %d", ptr2);
+    free(ptr2);
+    LOGE("我是log %d", ptr2);
+    //malloc/free是C语言就有的特性，c++继承了这一特性。
+    // 但c++更推荐使用new运算符分配内存。malloc/free只是动态分配内存空间/释放空间。
+    // 而new/delete除了分配空间还会自动调用构造函数和析构函数进行初始化与清理。
+    // 注意：对于数组的分配和释放，需要使用 new[] 和 delete[] 运算符。
+    int *ptr3 = new int; // 使用new运算符分配内存
+    delete ptr3; // 使用delete运算符释放内存
+
+    int *arr3 = new int[5]; // 使用new[]运算符分配数组内存
+    delete[] arr3; // 使用delete[]运算符释放数组内存
+
+    //虽然 malloc 和 free 在C++中仍然可用，但为了更好地利用C++的面向对象的特性和资源管理机制，
+    //推荐使用 new 和 delete 运算符进行内存的分配和释放。
+
+    //函数返回值类型 (* 指针变量名) (函数参数列表);
+    //例如：int (*p)(int,int)
+    //这段代码就定义了一个函数指针变量p，可以用来存储函数的首地址（一般直接使用函数名代替），
+    // 该函数类型为带两个int形参以及返回值类型为int。
+    //注意：
+    //(*指针变量名)这个括号不能省略，如果写成了int *p(int,int)，那就不是一个函数指针了，而是一个返回值类型为一个int型指针的函数p。
+}
+
+namespace veryLongName {
+    int a = 10;
+
+    void func() { cout << "hello namespace" << endl; }
+}
+
+//实现头文件声明的MySpace1的函数
+void MySpace1::func1() {
+    //命名空间别名
+    namespace shortName = veryLongName;
+    LOGE("我是log %d", shortName::a)
+    shortName::func();
+    //1. 通过命名空间域运算符
+    MySpace1::func2(2)
+    //2. using声明
+    using MySpace1::func2
+    (3);
+    using MySpace1::paramA
+}
+
+void MySpace1::func2(int param) {
+
 }
 
 
 
+//1. 结构体中即可以定义成员变量，也可以定义成员函数
+struct Student{
+    string mName;
+    int mAge;
+    void setName(string name){ mName = name; }
+    void setAge(int age){ mAge = age; }
+    void showStudent(){
+        cout << "Name:" << mName << " Age:" << mAge << endl;
+    }
+};
+//2. c++中定义结构体变量不需要加struct关键字
+void test01(){
+    Student student;
+    student.setName("John");
+    student.setAge(20);
+    student.showStudent();
+}
 
 
 
